@@ -462,15 +462,14 @@ class Github:
         # There is no native "/enterprises/{enterprise}" api, so this function is a hub for apis that start with "/enterprise/{enterprise}".
         return github.Enterprise.Enterprise.from_slug(self.__requester, enterprise)
 
-    def get_repo(self, full_name_or_id: int | str, lazy: Opt[bool] = NotSet) -> Repository:
+    def get_repo(self, full_name_or_id: int | str) -> Repository:
         """
         :calls: `GET /repos/{owner}/{repo} <https://docs.github.com/en/rest/reference/repos>`_ or `GET /repositories/{id} <https://docs.github.com/en/rest/reference/repos>`_
         """
         assert isinstance(full_name_or_id, (str, int)), full_name_or_id
         url_base = "/repositories/" if isinstance(full_name_or_id, int) else "/repos/"
         url = f"{url_base}{full_name_or_id}"
-        requester = self.__requester if is_undefined(lazy) else self.__requester.withLazy(lazy)
-        return github.Repository.Repository(requester, url=url)
+        return github.Repository.Repository(self.__requester, url=url)
 
     def get_repos(
         self,
