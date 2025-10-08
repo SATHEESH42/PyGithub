@@ -480,7 +480,7 @@ class CompletableGithubObjectWithPaginatedProperty(Framework.TestCase):
             commits = list(reversed(comparison.commits))
             self.assertEqual(len(commits), 7)
             print(commits)
-            commit = commits[-3]
+            commit = commits[2]
             self.assertEqual(commit.sha, "cbfe8d0f623ca29d984ec09d2b566e9ab10ae024")
             # files is a PaginatedList, which should respect per_page
             files = list(reversed(commit.files))
@@ -515,7 +515,7 @@ class CompletableGithubObjectWithPaginatedProperty(Framework.TestCase):
             commits = list(reversed(comparison.commits))
             self.assertEqual(len(commits), 7)
             print(commits)
-            commit = commits[3]
+            commit = commits[2]
             self.assertEqual(commit.sha, "cbfe8d0f623ca29d984ec09d2b566e9ab10ae024")
             # files is a PaginatedList, which should respect per_page
             files = list(reversed(commit.files))
@@ -525,11 +525,13 @@ class CompletableGithubObjectWithPaginatedProperty(Framework.TestCase):
             requests,
             lambda r: r.url,
             [
-                "/repos/PyGithub/PyGithub/compare/main...remove-deprecations?per_page=3&page=1",
-                "/repositories/3544490/compare/main...remove-deprecations?per_page=3&page=2",
-                "/repositories/3544490/compare/main...remove-deprecations?per_page=3&page=1",
-                "/repos/PyGithub/PyGithub/commits/f23891b5a77396c88f61957810646ceecc6d1257?page=1",
-                "/repos/PyGithub/PyGithub/commits/f23891b5a77396c88f61957810646ceecc6d1257?page=1",
+                "/repos/PyGithub/PyGithub/compare/6cfe46b712e2bf65560bd8189c4654cd6c56eeca...cef98416f45a9cdaf84d7f53cea13ac074a2c05d?per_page=3&page=1",
+                "/repositories/3544490/compare/6cfe46b712e2bf65560bd8189c4654cd6c56eeca...cef98416f45a9cdaf84d7f53cea13ac074a2c05d?per_page=3&page=3",
+                "/repositories/3544490/compare/6cfe46b712e2bf65560bd8189c4654cd6c56eeca...cef98416f45a9cdaf84d7f53cea13ac074a2c05d?per_page=3&page=2",
+                "/repositories/3544490/compare/6cfe46b712e2bf65560bd8189c4654cd6c56eeca...cef98416f45a9cdaf84d7f53cea13ac074a2c05d?per_page=3&page=1",
+                "/repos/PyGithub/PyGithub/commits/cbfe8d0f623ca29d984ec09d2b566e9ab10ae024?page=1",
+                "/repositories/3544490/commits/cbfe8d0f623ca29d984ec09d2b566e9ab10ae024?page=2",
+                "/repositories/3544490/commits/cbfe8d0f623ca29d984ec09d2b566e9ab10ae024?page=1",
             ],
         )
 
